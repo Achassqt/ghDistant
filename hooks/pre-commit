@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Add this file in your .git/hooks/ and name it as 'pre-commit'
+# Change the following values to suit your local setup.
+
+# The path relative to the repository root in which to store the commit information.
+INFO_PATH=suivi
+INFO_FILE=commitInfo.txt
+
+read -p "Voulez-vous vérifier le commit ? (y/[n]) " yn < /dev/tty
+yn=${yn:n}
+case $yn in
+    [Yy]* )
+        echo "commit vérifié le $(date)" > $INFO_PATH/$INFO_FILE
+        git add $INFO_PATH/$INFO_FILE
+        exit 0;;
+    [Nn]* )
+        exit 0;;
+esac
+exit 0
